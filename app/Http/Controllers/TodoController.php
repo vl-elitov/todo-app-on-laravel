@@ -14,7 +14,7 @@ class TodoController extends Controller
      */
     public function index()
     {
-        $tasks = Todo::all();
+        $tasks = Todo::query()->orderBy('due')->get();
         return view('todo.index')->with('tasks', $tasks);
     }
 
@@ -47,7 +47,8 @@ class TodoController extends Controller
      */
     public function show($id)
     {
-        //
+        $task = Todo::find($id);
+        return view('todo.show')->with('task', $task);
     }
 
     /**
