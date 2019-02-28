@@ -7,10 +7,14 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="<?php csrf_token() ?>">
     <title>Todo app</title>
+    <link rel="stylesheet" href="/css/app.css">
+    <script src="/js/app.js"></script>
 
 </head>
 <body>
-<div class="container">
+@include('inc.navbar')
+<div class="container mb-3 mt-3">
+    @include('inc.messages')
     @yield('content')
 </div>
 </body>
