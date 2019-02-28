@@ -1,5 +1,9 @@
 <?php
 
+use Collective\Html\HtmlFacade;
+use Collective\Html\FormFacade;
+use Collective\Html\HtmlServiceProvider;
+
 return [
 
     /*
@@ -166,6 +170,8 @@ return [
          * Package Service Providers...
          */
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+        HtmlServiceProvider::class,
+        \App\Providers\FormProvider::class,
         /*
          * Application Service Providers...
          */
@@ -225,7 +231,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
+        'Form' => FormFacade::class,
+        'Html' => HtmlFacade::class,
     ],
 
 ];
