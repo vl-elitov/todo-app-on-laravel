@@ -70,7 +70,8 @@ class TodoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $task = Todo::find($id);
+        return view('todo.edit')->with('task', $task);
     }
 
     /**
@@ -78,11 +79,22 @@ class TodoController extends Controller
      *
      * @param  \Illuminate\Http\Request $request
      * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @return void
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'text' => 'required|string|max:255',
+            'body' => 'required',
+            'due' => 'required|string|max:255',
+        ]);
+        $task = Todo::find($id);
+        $task->text = $request->input('text');
+        $task->body = $request->input('body');
+        $task->due = $request->input('due');
+        $task->save();
+        return redirect('/')->with('success', 'Updated successfully');
     }
 
     /**
