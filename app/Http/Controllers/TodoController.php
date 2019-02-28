@@ -32,11 +32,22 @@ class TodoController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return void
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'text' => 'required|string|max:255',
+            'body' => 'required',
+            'due' => 'required|string|max:255',
+        ]);
+        $task = new Todo();
+        $task->text = $request->input('text');
+        $task->body = $request->input('body');
+        $task->due = $request->input('due');
+        $task->save();
+        return redirect('/')->with('success', 'Task added');
     }
 
     /**
